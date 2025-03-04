@@ -13,8 +13,9 @@ Below you can find every task that I have done to create my App.
 1- Create base framework with Vite;
 2- Delete base default Vite script to have a clean starting point;
 3- Create components folder with jsx and module.css file;
-4- Create first function in component to see if there are any error
-    ```Javascript component file
+4- Create first function in component to see if there are any error:
+    Component javascript file
+    
     import React from "react";
     import styles from './playlist.module.css';
 
@@ -24,9 +25,10 @@ Below you can find every task that I have done to create my App.
     }
 
     export default Playlist;
-    ```
-5- On App return the first component;
-    ```App javascript file
+
+5- On App return the first component:
+    App javascript file
+    
     function App() {
         return (
             <>
@@ -35,9 +37,10 @@ Below you can find every task that I have done to create my App.
         )
     }
     export default App
-    ```
-6- Check on local host if the first component is rendered;
-    ```Terminal
+    
+6- Check on local host if the first component is rendered:
+    Terminal
+    
     npm run dev
-    ```
+    
 
