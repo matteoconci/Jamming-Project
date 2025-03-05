@@ -2,58 +2,39 @@ import React, { useState } from 'react'
 import './App.css'
 import Playlist from '../Playlist/playlist.jsx';
 import Tracklist from '../Tracklist/tracklist.jsx';
+import SearchBar from '../SearchBar/searchBar.jsx';
 
-const songArray = [
-  {
-      name: 'Endure',
-      artist: 'David A. Molina',
-      album: 'Genesis',
-      id: 1
-  },
-  {
-      name: 'Coma',
-      artist: 'Etsu',
-      album: 'Nightwalk',
-      id: 2
-  },
-  {
-      name: 'The Great Gig in the Sky',
-      artist: 'Pink Floyd',
-      album: 'The Dark Side of the Moon',
-      id: 3
-  },
-  {
-      name: 'Atrid',
-      artist: 'VonnBoyd',
-      album: 'Desperation',
-      id: 4
-  },
-  {
-      name: 'Serenity',
-      artist: 'The Pitcher',
-      album: 'Serenity/Our Core',
-      id: 5
-  },
-  {
-      name: 'Snow Flakes',
-      artist: 'Blackbird',
-      album: 'Lonely Bird',
-      id: 6
-  }
-];
 
 function App() {
+  const [search, setSearch] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+
+  function handleSearch() {
+    const songArray = [
+      {
+          name: 'Endure',
+          artist: 'David A. Molina',
+          album: 'Genesis',
+          id: 1
+      },
+      {
+          name: 'Coma',
+          artist: 'Etsu',
+          album: 'Nightwalk',
+          id: 2
+      }
+    ];
+    setSearchResults(songArray);
+  }
 
   return (
     <>
-      <Playlist />
-      <div>
-        <input type="text" />
-        <button>
-          Search
-        </button>
-      </div>
-      <Tracklist tracks={songArray}/>
+      <SearchBar 
+        search={search} 
+        setSearch={setSearch} 
+        handleSearch={handleSearch}
+      />
+      <Tracklist tracks={searchResults}/>
       <div >
         <button >
           Save to Spotify
