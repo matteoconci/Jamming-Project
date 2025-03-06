@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
-import './App.css'
+import React, { useState } from 'react';
 import Playlist from '../Playlist/playlist.jsx';
 import SearchBar from '../SearchBar/searchBar.jsx';
 import Tracklist from '../Tracklist/tracklist.jsx';
+import './App.css';
 
 const playlistObj = {
   name: 'My Playlist',
@@ -12,16 +12,15 @@ const playlistObj = {
       artist: 'Almost Vanished',
       album: 'Cold Senses',
       id: 1
-  },
-  {
+    },
+    {
       name: 'Foresight',
       artist: 'Myst',
       album: 'Naturesque',
       id: 2
-  }  
+    }  
   ]
 };
-
 
 function App() {
   const [search, setSearch] = useState('');
@@ -44,28 +43,26 @@ function App() {
       }
     ];
     setSearchResults(songArray);
-  }
+  };
 
   return (
     <>
-      <SearchBar  
-        search={search} 
-        setSearch={setSearch} 
-        handleSearch={handleSearch}
-      />
-      <Tracklist tracks={searchResults}/>
-      <Playlist 
-        playlistName={playlistObj.name}
-        tracks={playlistObj.tracks}
-      />
-      <div >
-        <button >
-          Save to Spotify
-        </button>
+      <div className='search'>
+        <SearchBar  
+          search={search} 
+          setSearch={setSearch} 
+          handleSearch={handleSearch}
+        />
+        <Tracklist tracks={searchResults}/>
       </div>
-      
+      <div className='playlist'>
+        <Playlist 
+          playlistName={playlist.name}
+          tracks={playlist.tracks}
+        />
+      </div>
     </>
-  )
-}
+  );
+};
 
 export default App

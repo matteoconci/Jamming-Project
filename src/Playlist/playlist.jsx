@@ -4,7 +4,7 @@ import Tracklist from '../Tracklist/tracklist.jsx';
 
 function Playlist({playlistName, tracks}) {
     return (
-        <div>
+        <div className={styles.playlist}>
             <h2>{playlistName}</h2>
             <Tracklist tracks={tracks}/>
         </div>

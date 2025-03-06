@@ -1,3 +1,10 @@
-.tracklist {
-    color: red;
+.track {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+.li {
+    margin: 10px;
 }
