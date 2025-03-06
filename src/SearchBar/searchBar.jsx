@@ -3,8 +3,9 @@ import styles from './searchBar.module.css';
 
 function SearchBar({search, setSearch, handleSearch}) {
     return (
-        <div className={styles.input}>
+        <div>
             <input 
+                className={styles.input}
                 type="text"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}

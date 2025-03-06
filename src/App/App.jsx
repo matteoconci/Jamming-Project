@@ -6,20 +6,7 @@ import './App.css';
 
 const playlistObj = {
   name: 'My Playlist',
-  tracks: [
-    {
-      name: 'Nightside',
-      artist: 'Almost Vanished',
-      album: 'Cold Senses',
-      id: 1
-    },
-    {
-      name: 'Foresight',
-      artist: 'Myst',
-      album: 'Naturesque',
-      id: 2
-    }  
-  ]
+  tracks: []
 };
 
 function App() {
@@ -41,6 +28,18 @@ function App() {
           artist: 'Etsu',
           album: 'Nightwalk',
           id: 2
+      },
+      {
+        name: 'Nightside',
+        artist: 'Almost Vanished',
+        album: 'Cold Senses',
+        id: 3
+      },
+      {
+        name: 'Foresight',
+        artist: 'Myst',
+        album: 'Naturesque',
+        id: 4
       }
     ];
 
@@ -56,6 +55,14 @@ function App() {
     setHasSearched(true);
   };
 
+  function handleAdd(trackId) {
+    if(!playlist.tracks.some(track => track.id === trackId) ) {
+      const trackToAdd = searchResults.find(track => track.id === trackId);
+      if(!trackToAdd) return;
+      setPlaylist({ ...playlist, tracks: [...playlist.tracks, trackToAdd] });
+    }
+  }
+
   return (
     <>
       <div className='search'>
@@ -67,9 +74,10 @@ function App() {
         <Tracklist 
         tracks={searchResults}
         hasSearched={hasSearched}
+        handleAdd={handleAdd}
         />
-        
       </div>
+
       <div className='playlist'>
         <Playlist 
           playlistName={playlist.name}

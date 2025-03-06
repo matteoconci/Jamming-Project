@@ -1,12 +1,17 @@
 import React from "react";
 import styles from './playlist.module.css';
-import Tracklist from '../Tracklist/tracklist.jsx';
+import Track from '../Track/track.jsx';
 
 function Playlist({playlistName, tracks}) {
     return (
         <div className={styles.playlist}>
             <h2>{playlistName}</h2>
-            <Tracklist tracks={tracks}/>
+            {tracks.map((track) => (
+                        <div key={track.id} className={styles.track}>
+                            <Track track={track} />
+                        </div>
+                    ))}
+            <Track tracks={tracks}/>
         </div>
     );
 }
