@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Playlist from '../Playlist/playlist.jsx';
 import SearchBar from '../SearchBar/searchBar.jsx';
 import Tracklist from '../Tracklist/tracklist.jsx';
@@ -26,8 +26,9 @@ function App() {
   const [search, setSearch] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [playlist, setPlaylist] = useState(playlistObj);
+  const [hasSearched, setHasSearched] = useState(false);
 
-  function handleSearch() {
+  function handleSearch(search) {
     const songArray = [
       {
           name: 'Endure',
@@ -42,7 +43,17 @@ function App() {
           id: 2
       }
     ];
-    setSearchResults(songArray);
+
+    const trimSearch = search.trim();
+
+    if(!search.trim()) {
+      setSearchResults([]);
+    } else {
+      const filteredSongs =
+      songArray.filter((song) => song.name.toLowerCase().includes(trimSearch.toLowerCase()));
+      setSearchResults(filteredSongs);
+    };
+    setHasSearched(true);
   };
 
   return (
@@ -51,9 +62,13 @@ function App() {
         <SearchBar  
           search={search} 
           setSearch={setSearch} 
-          handleSearch={handleSearch}
+          handleSearch={() => handleSearch(search)}
         />
-        <Tracklist tracks={searchResults}/>
+        <Tracklist 
+        tracks={searchResults}
+        hasSearched={hasSearched}
+        />
+        
       </div>
       <div className='playlist'>
         <Playlist 

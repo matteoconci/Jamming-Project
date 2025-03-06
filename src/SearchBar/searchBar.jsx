@@ -3,7 +3,7 @@ import styles from './searchBar.module.css';
 
 function SearchBar({search, setSearch, handleSearch}) {
     return (
-        <div>
+        <div className={styles.input}>
             <input 
                 type="text"
                 value={search}

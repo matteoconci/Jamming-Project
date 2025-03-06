@@ -2,7 +2,7 @@ import React from "react";
 import styles from './tracklist.module.css';
 
 
-function Tracklist({tracks}) {
+function Tracklist({tracks, hasSearched}) {
     const resultsList = () => {
         if(tracks.length > 0) {
             return tracks.map((track) => (
@@ -14,12 +14,8 @@ function Tracklist({tracks}) {
                 </div>
                 )
             );
-        } else {
-            return (
-                <div>
-                    <p>No results found</p>
-                </div>
-            );
+        } else if(hasSearched && tracks.length === 0) {
+            return <p>No results found</p>;
         };
     };
     return  (
