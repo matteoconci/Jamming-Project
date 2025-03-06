@@ -23,10 +23,7 @@ function Tracklist({tracks}) {
     };
     return  (
         <div>
-            <h2 className={styles.tracklist}>Tracklist</h2>
-            <div>
-                {resultsList()}
-            </div>
+            {resultsList()}
         </div>    
     );
 };
