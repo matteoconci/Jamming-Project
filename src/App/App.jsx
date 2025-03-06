@@ -56,7 +56,8 @@ function App() {
       <Tracklist tracks={searchResults}/>
       <Playlist 
         playlistName={playlistObj.name}
-        tracks={playlistObj.tracks}/>
+        tracks={playlistObj.tracks}
+      />
       <div >
         <button >
           Save to Spotify

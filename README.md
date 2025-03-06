@@ -10,14 +10,17 @@ The feature of the app are:
 
 Below you can find every task that I have done to create my App. 
 
+> [!WARNING]  
+> *The code below represent the first scripting of the file, I wrote it down step by step as I did it, so it might have been modified over time and can have some incongruence.* 
+
 1. Create base framework with Vite;
    Terminal
     ```
    npm create vite@latest
     
 2. Delete base default Vite script to have a clean starting point;
-3. Create components folder with jsx and module.css file;
-4. Create first function in component to see if there are any error:
+3. Add components folder with jsx and module.css file;
+4. Add first function in component to see if there are any error:
     Component javascript file
     ```
     import React from "react";
@@ -48,9 +51,9 @@ Below you can find every task that I have done to create my App.
     npm run dev
 
 7. Add a manual object of song to test the React flow
-8. Create the first component code in tracklist:
+8. Add the first component code in tracklist:
    1. This component will receive an object of song to render to the console;
-   2. Create an if statement to check if the object is > 0, if true it will return an array of the song with .map()
+   2. Add an if statement to check if the object is > 0, if true it will return an array of the song with .map()
         ```
         const resultsList = () => {
             if(tracks.length > 0) {
@@ -74,11 +77,11 @@ Below you can find every task that I have done to create my App.
 9.  Render the component and add a props to send to it the object of songs
     ```
     <Tracklist tracks={searchResults}/>
-10. Create the useState to handle the searchBar input and to create the searchResult to send to the tracklist component
+10. Add the useState to handle the searchBar input and to add the searchResult to send to the tracklist component
     ```
     const [search, setSearch] = useState('');
     const [searchResults, setSearchResults] = useState([]);
-11. Create the handleSearch function that will start when the button isClick with the recall to SetSearchResults
+11. Add the handleSearch function that will start when the button isClick with the recall to SetSearchResults
     ```
     function handleSearch() {
         const songArray = [
@@ -97,7 +100,7 @@ Below you can find every task that I have done to create my App.
         ];
         setSearchResults(songArray);
     }
-12. Create the base code for the searchBar component with the input and button jsx that will pass the input to the props
+12. Add the base code for the searchBar component with the input and button jsx that will pass the input to the props
     ```
     function SearchBar({search, setSearch, handleSearch}) {
         return (
@@ -122,8 +125,23 @@ Below you can find every task that I have done to create my App.
         setSearch={setSearch} 
         handleSearch={handleSearch}
     />
-14. 
-
+14. Add base code for the playlist component with the only role of render the playlist received from App. For semplification we recall the tracklist component to render the track 
+    ```
+    function Playlist({playlistName, tracks}) {
+    return (
+        <div>
+            <h2>{playlistName}</h2>
+            <Tracklist tracks={tracks}/>
+        </div>
+    );
+    }
+15. Add the base code to render the playlist in App and an example playlist for testing
+    ```
+    <Playlist 
+        playlistName={playlistObj.name}
+        tracks={playlistObj.tracks}
+    />
+16.
 
 
 
