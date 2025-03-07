@@ -2,7 +2,7 @@ import React from "react";
 import styles from './playlist.module.css';
 import Track from '../Track/track.jsx';
 
-function Playlist({playlistName, NewPlaylistName, setNewPlaylistName, tracks, handleRemove, handleRename}) {
+function Playlist({playlist, playlistName, NewPlaylistName, setNewPlaylistName, tracks, handleRemove, handleRename, handleSave}) {
     
     return (
         <div className={styles.playlist}>
@@ -26,6 +26,7 @@ function Playlist({playlistName, NewPlaylistName, setNewPlaylistName, tracks, ha
                                 </button>
                             </div>
                         ))}
+                {playlist.tracks.length > 0 ? <button onClick={handleSave}>Save Playlist to Spotify</button> : null}
             </div>           
         </div>
     );
