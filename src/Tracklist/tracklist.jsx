@@ -12,7 +12,7 @@ function Tracklist({tracks, hasSearched, handleAdd}) {
                         <div key={track.id} className={styles.track}>
                             <Track track={track} />
                             <button className={styles.li} onClick={() => handleAdd(track.id)}>
-                                Add to Playlist
+                                +
                             </button>
                         </div>
                     ))}

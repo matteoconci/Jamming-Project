@@ -5,7 +5,6 @@ import Tracklist from '../Tracklist/tracklist.jsx';
 import './App.css';
 
 const playlistObj = {
-  name: 'My Playlist',
   tracks: []
 };
 
@@ -14,7 +13,8 @@ function App() {
   const [searchResults, setSearchResults] = useState([]);
   const [playlist, setPlaylist] = useState(playlistObj);
   const [hasSearched, setHasSearched] = useState(false);
-  const [playlistName, setPlaylistName] = useState(playlist.name);
+  const [playlistName, setPlaylistName] = useState('My Playlist');
+  const [newPlaylistName, setNewPlaylistName] = useState(playlistName)
 
   function handleSearch(search) {
     const songArray = [
@@ -60,16 +60,20 @@ function App() {
     if(!playlist.tracks.some(track => track.id === trackId) ) {
       const trackToAdd = searchResults.find(track => track.id === trackId);
       if(!trackToAdd) return;
-      setPlaylist({ ...playlist, tracks: [...playlist.tracks, trackToAdd] });
+      setPlaylist({tracks: [...playlist.tracks, trackToAdd] });
     };
   };
 
   function handleRemove(trackId) {
     if(playlist.tracks.some(track => track.id === trackId) ) {
       const newTracks = playlist.tracks.filter(track => track.id !== trackId);
-      setPlaylist({ ...playlist, tracks: newTracks });
+      setPlaylist({tracks: newTracks });
     };
   };
+
+  function handleRename() {
+    setPlaylistName(newPlaylistName);
+  }
 
   return (
     <>
@@ -88,9 +92,12 @@ function App() {
 
       <div className='playlist'>
         <Playlist 
-          playlistName={playlist.name}
+          playlistName={playlistName}
+          newPlaylistName={newPlaylistName}
+          setNewPlaylistName={setNewPlaylistName}
           tracks={playlist.tracks}
           handleRemove={handleRemove}
+          handleRename={handleRename}
         />
       </div>
     </>
