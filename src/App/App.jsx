@@ -3,6 +3,8 @@ import Playlist from '../Playlist/playlist.jsx';
 import SearchBar from '../SearchBar/searchBar.jsx';
 import Tracklist from '../Tracklist/tracklist.jsx';
 import './App.css';
+import Spotify from '../spotify.js';
+
 
 const playlistObj = {
   tracks: []
@@ -14,49 +16,31 @@ function App() {
   const [playlist, setPlaylist] = useState(playlistObj);
   const [hasSearched, setHasSearched] = useState(false);
   const [playlistName, setPlaylistName] = useState('My Playlist');
-  const [newPlaylistName, setNewPlaylistName] = useState(playlistName)
+  const [newPlaylistName, setNewPlaylistName] = useState(playlistName);
+  const [loggedIn, setLoggedIn] = useState(false);
 
-  function handleSearch(search) {
-    const songArray = [
-      {
-          name: 'Endure',
-          artist: 'David A. Molina',
-          album: 'Genesis',
-          id: 1,
-          uri: 'spotify:track:2AsthUAUp5KmDplPZjOHjP'
-      },
-      {
-          name: 'Coma',
-          artist: 'Etsu',
-          album: 'Nightwalk',
-          id: 2,
-          uri: 'spotify:track:0VwA9VeEQmwzEmUvZ1SkEs'
-      },
-      {
-        name: 'Nightside',
-        artist: 'Almost Vanished',
-        album: 'Cold Senses',
-        id: 3,
-        uri: 'spotify:track:08dF4RdsGGLCbN3WoRAabU'
-      },
-      {
-        name: 'Foresight',
-        artist: 'Myst',
-        album: 'Naturesque',
-        id: 4,
-        uri: 'spotify:track:69QrugD4h6rRXLgR8FBIVr'
-      }
-    ];
+  useEffect(() => {
+    const token = Spotify.getAccessToken();
+    if (token) {
+      setLoggedIn(true);
+    }
+  }, []);
 
-    const trimSearch = search.trim();
-
-    if(!search.trim()) {
+  async function handleSearch(searchInput) {
+    const trimSearch = searchInput.trim();
+    if (!trimSearch) {
       setSearchResults([]);
-    } else {
-      const filteredSongs =
-      songArray.filter((song) => song.name.toLowerCase().includes(trimSearch.toLowerCase()));
-      setSearchResults(filteredSongs);
-    };
+      setHasSearched(true);
+      return;
+    }
+    try {
+      // Facciamo la ricerca su Spotify
+      const results = await Spotify.search(trimSearch);
+      setSearchResults(results);
+    } catch (error) {
+      console.error('Errore durante la ricerca:', error);
+      setSearchResults([]);
+    }
     setHasSearched(true);
   };
 
