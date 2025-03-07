@@ -83,6 +83,60 @@ const Spotify = {
       return [];
     }
   },
+
+  async savePlaylist(playlistName, trackUris) {
+    // 1) Controlli iniziali
+    if (!playlistName || !trackUris.length) return;
+
+    // 2) Token e header
+    const token = this.getAccessToken();
+    const headers = {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    };
+
+    try {
+      // 3) Ottieni l'ID utente
+      const responseMe = await fetch("https://api.spotify.com/v1/me", {
+        headers: headers
+      });
+      const jsonMe = await responseMe.json();
+      const userId = jsonMe.id;
+
+      // 4) Crea una nuova playlist
+      const responsePlaylist = await fetch(
+        `https://api.spotify.com/v1/users/${userId}/playlists`,
+        {
+          method: "POST",
+          headers: headers,
+          body: JSON.stringify({
+            name: playlistName,
+            description: "Created with Jammming!",
+          }),
+        }
+      );
+      const jsonPlaylist = await responsePlaylist.json();
+      const playlistId = jsonPlaylist.id;
+
+      // 5) Aggiungi i brani (uris) alla playlist
+      const responseAddTracks = await fetch(
+        `https://api.spotify.com/v1/users/${userId}/playlists/${playlistId}/tracks`,
+        {
+          method: "POST",
+          headers: headers,
+          body: JSON.stringify({
+            uris: trackUris,
+          }),
+        }
+      );
+      // Puoi controllare la risposta se vuoi
+      const jsonAddTracks = await responseAddTracks.json();
+      return jsonAddTracks;
+    } catch (error) {
+      console.error("Errore durante il salvataggio della playlist:", error);
+      throw error;
+    }
+  },
 };
 
 export default Spotify;

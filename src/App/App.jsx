@@ -63,11 +63,21 @@ function App() {
     setPlaylistName(newPlaylistName);
   }
 
-  function handleSave() {
+  async function handleSave() {
+    // Recupera gli URI delle tracce selezionate
     const uriArray = playlist.tracks.map(track => track.uri);
-    if(uriArray.length === 0) return;
-    setPlaylist(playlistObj);
-    alert('Playlist saved to Spotify');
+    if (uriArray.length === 0) return;
+
+    // Salva la playlist su Spotify
+    try {
+      await Spotify.savePlaylist(playlistName, uriArray);
+      // Se tutto va bene, resetta la playlist in React
+      setPlaylist(playlistObj);
+      alert('Playlist salvata su Spotify!');
+    } catch (error) {
+      console.error("Errore durante il salvataggio della playlist:", error);
+      alert('Qualcosa è andato storto durante il salvataggio!');
+    }
   }
 
   return (
