@@ -9,6 +9,7 @@
     "lint": "eslint .",
     "preview": "vite preview"
   },
+  "homepage": "https://matteoconci.github.io/Jamming-Project/",
   "dependencies": {
     "react": "^19.0.0",
     "react-dom": "^19.0.0"

@@ -1,7 +1,10 @@
 const clientId = "1ca1bbd85bed4b8e85101451b267a803";  // Sostituiscilo con il Client ID della tua app Spotify
-const redirectUri = "http://localhost:5173/";  // Deve essere lo stesso registrato su Spotify Developer
+const redirectUri = window.location.hostname === "localhost"// Deve essere lo stesso registrato su Spotify Developer
+  ? "http://localhost:5173/"  // 🌍 In locale (dev)
+  : "https://matteoconci.github.io/Jamming-Project/";  // 🌐 In produzione
 const authEndpoint = "https://accounts.spotify.com/authorize";
 const scopes = ["playlist-modify-public", "playlist-modify-private"];  // Permessi richiesti
+
 
 let accessToken;
 
