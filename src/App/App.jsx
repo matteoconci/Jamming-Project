@@ -14,6 +14,7 @@ function App() {
   const [searchResults, setSearchResults] = useState([]);
   const [playlist, setPlaylist] = useState(playlistObj);
   const [hasSearched, setHasSearched] = useState(false);
+  const [playlistName, setPlaylistName] = useState(playlist.name);
 
   function handleSearch(search) {
     const songArray = [
@@ -60,8 +61,15 @@ function App() {
       const trackToAdd = searchResults.find(track => track.id === trackId);
       if(!trackToAdd) return;
       setPlaylist({ ...playlist, tracks: [...playlist.tracks, trackToAdd] });
-    }
-  }
+    };
+  };
+
+  function handleRemove(trackId) {
+    if(playlist.tracks.some(track => track.id === trackId) ) {
+      const newTracks = playlist.tracks.filter(track => track.id !== trackId);
+      setPlaylist({ ...playlist, tracks: newTracks });
+    };
+  };
 
   return (
     <>
@@ -82,6 +90,7 @@ function App() {
         <Playlist 
           playlistName={playlist.name}
           tracks={playlist.tracks}
+          handleRemove={handleRemove}
         />
       </div>
     </>
